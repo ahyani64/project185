@@ -21,6 +21,7 @@ Route::get('tes', function () {
     return 'Hello';
 });
 
+//Route Product
 Route::get('barang', 'API\ProductController@index');
 
 Route::get('barang/{id}', 'API\ProductController@show');
@@ -30,4 +31,14 @@ Route::post('barang', 'API\ProductController@store');
 
 //delete data
 Route::delete('barang/{id}', 'API\ProductController@destroy');
-    
+
+//Route Category
+Route::get('kategori', 'API\CategoriesController@index');
+//get one Category
+Route::get('kategori/{id}', 'API\CategoriesController@show');
+
+//add Category
+Route::post('kategori', 'API\CategoriesController@store');
+
+//delete Category
+Route::delete('kategori/{id}', 'API\CategoriesController@destroy');
