@@ -3,9 +3,9 @@
 
     
     <div class="container p-2 mt-2">
-    <h2>Data Ujian</h2>
+    <h2>Category</h2>
     <br> 
-        <a href="{{ route('ujian.add') }}" class="btn btn-primary">Tambah Data</a>
+        <a href="{{ route('product.add') }}" class="btn btn-primary">Add Category</a>
     
 
     <div class="col">
@@ -13,24 +13,18 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Matakuliah</th>
-                    <th>Dosen</th>
-                    <th>Jumlah Soal</th>
-                    <th>Keterangan</th>
+                    <th>Nama</th>
+                    <th>Description</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($ujians as $ujian)
+                @foreach ($categories as $category)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $ujian->nama_mk }}</td>
-                    <td>{{ $ujian->dosen }}</td>
-                    <td>{{ $ujian->jumlah_soal }}</td>
-                    <td>{{ $ujian->keterangan }}</td>
-                    <td>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->description }}</td>
+                    <td>Hapus</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Ujian;
+use App\Midsemester;
 use Illuminate\Http\Request;
 
-class UjianController extends Controller
+class MidsemesterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,32 +14,39 @@ class UjianController extends Controller
      */
     public function index()
     {
-        $ujians = Ujian::all();
+        $midsemesters = Midsemester::all();
         //dd($data);
-        return view('ujian.index', compact('ujians'));
+        return view('mid.index', compact('midsemesters'));
         //
     }
 
     public function add()
     {
-        return view('ujian.add');
+        return view('mid.add');
     }
 
     public function save(Request $request)
     {
         //dd($request->all());
         $request->validate([
-            'nama_mk' => 'required',
-            'dosen' => 'required',
-            'jumlah_soal' => 'required|integer',
-            'keterangan' => 'required'
+            'kolom_nim' => 'required',
+            'kolom_nama' => 'required',
+            'kolom_umur' => 'required',
+            'kolom_alamat' => 'required'
         ]);
 
-        Ujian::create($request->all());
-        return redirect()->route('ujian.index');
+        Midsemester::create($request->all());
+        return redirect()->route('mid.index');
 
         //kembali ke halaman sebelumnya
      // return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $midsemester = midsemester::find($id);
+        $midsemester->delete();
+        return redirect()->route('mid.index');
     }
 
     /**
@@ -66,10 +73,10 @@ class UjianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Midsemester  $midsemester
      * @return \Illuminate\Http\Response
      */
-    public function show(Ujian $ujian)
+    public function show(Midsemester $midsemester)
     {
         //
     }
@@ -77,10 +84,10 @@ class UjianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Midsemester  $midsemester
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ujian $ujian)
+    public function edit(Midsemester $midsemester)
     {
         //
     }
@@ -89,10 +96,10 @@ class UjianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Midsemester  $midsemester
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ujian $ujian)
+    public function update(Request $request, Midsemester $midsemester)
     {
         //
     }
@@ -100,10 +107,10 @@ class UjianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Midsemester  $midsemester
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ujian $ujian)
+    public function destroy(Midsemester $midsemester)
     {
         //
     }

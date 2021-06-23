@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Ujian;
+use App\Category;
 use Illuminate\Http\Request;
 
-class UjianController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,32 +14,11 @@ class UjianController extends Controller
      */
     public function index()
     {
-        $ujians = Ujian::all();
+        //$categories = Category::all();
+        $categories = Category::with('kategori')->get();
         //dd($data);
-        return view('ujian.index', compact('ujians'));
+        return view('category.index', compact('categories'));
         //
-    }
-
-    public function add()
-    {
-        return view('ujian.add');
-    }
-
-    public function save(Request $request)
-    {
-        //dd($request->all());
-        $request->validate([
-            'nama_mk' => 'required',
-            'dosen' => 'required',
-            'jumlah_soal' => 'required|integer',
-            'keterangan' => 'required'
-        ]);
-
-        Ujian::create($request->all());
-        return redirect()->route('ujian.index');
-
-        //kembali ke halaman sebelumnya
-     // return redirect()->back();
     }
 
     /**
@@ -49,7 +28,7 @@ class UjianController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -66,10 +45,10 @@ class UjianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Ujian $ujian)
+    public function show(Category $category)
     {
         //
     }
@@ -77,10 +56,10 @@ class UjianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ujian $ujian)
+    public function edit(Category $category)
     {
         //
     }
@@ -89,10 +68,10 @@ class UjianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ujian $ujian)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -100,10 +79,10 @@ class UjianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ujian  $ujian
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ujian $ujian)
+    public function destroy(Category $category)
     {
         //
     }

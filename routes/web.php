@@ -35,5 +35,16 @@ Route::get('ujian/add', 'UjianController@add')->name('ujian.add');
     
 Route::post('ujian/save', 'UjianController@save')->name('ujian.save');
 
+Route::get('ujian/{id}/destroy', 'UjianController@destroy')->name('ujian.destroy');
 
 
+Route::get('category', 'CategoryController@index')->name('category.index'); 
+
+//route untuk midsemester
+Route::get('mid', 'MidsemesterController@index')->name('mid.index');
+
+Route::get('mid/add', 'MidsemesterController@add')->name('mid.add');
+    
+Route::post('mid/save', 'MidsemesterController@save')->name('mid.save');
+
+Route::get('/mid/destroy/{id}', 'MidsemesterController@delete');

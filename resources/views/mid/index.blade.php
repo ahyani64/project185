@@ -3,9 +3,9 @@
 
     
     <div class="container p-2 mt-2">
-    <h2>Data Ujian</h2>
+    <h2>Mid Semester</h2>
     <br> 
-        <a href="{{ route('ujian.add') }}" class="btn btn-primary">Tambah Data</a>
+        <a href="{{ route('mid.add') }}" class="btn btn-primary">Add Data</a>
     
 
     <div class="col">
@@ -13,23 +13,25 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Matakuliah</th>
-                    <th>Dosen</th>
-                    <th>Jumlah Soal</th>
-                    <th>Keterangan</th>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>Umur</th>
+                    <th>Alamat</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($ujians as $ujian)
+                @foreach ($midsemesters as $mid)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $ujian->nama_mk }}</td>
-                    <td>{{ $ujian->dosen }}</td>
-                    <td>{{ $ujian->jumlah_soal }}</td>
-                    <td>{{ $ujian->keterangan }}</td>
-                    <td>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    <td>{{ $mid->kolom_nim }}</td>
+                    <td>{{ $mid->kolom_nama }}</td>
+                    <td>{{ $mid->kolom_umur }}</td>
+                    <td>{{ $mid->kolom_alamat }}</td>
+                     <td>
+                        <a href="" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/mid/destroy/{{ $mid->id }}" class="btn btn-sm btn-danger">Delete</a>
+                        
                     </td>
                 </tr>
                 @endforeach
