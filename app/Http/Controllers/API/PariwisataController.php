@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Product;
+use App\Pariwisata;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class PariwisataController extends Controller
 {
-
-    //fungsi login
+    //for login
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['show']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
     /**
@@ -23,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::with('jenis')->get();
+        $data = Pariwisata::with('kategori')->get();
         return response()->json([
             'pesan' => 'Data Berhasil Ditemukan',
             'data' => $data
@@ -50,26 +49,26 @@ class ProductController extends Controller
     {
         $validasi = Validator::make($request->all(), [
             "name"          => "required",
-            "description"   => "required",
+            "location"      => "required",
             "price"         => "required|integer",
-            "category_id"   => "required|integer"
+            "description"   => "required",
+            "kategori_id"   => "required|integer"
         ]);
 
         if ($validasi->passes()) {
-            $data = Product::create($request->all());
+            $data = Pariwisata::create($request->all());
 
         return response()->json([
             'pesan' => 'Data Berhasil Ditambahkan',
             'data' => $data
         ], 200);
-        }
+    }
 
         return response()->json([
             'pesan' => 'Data Gagal Disimpan',
             'data' => $validasi->errors()->all()
         ], 400);
     }
-
 
     /**
      * Display the specified resource.
@@ -79,11 +78,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //cara 1
-        //return $id;
-
-        //cara 2
-        $data = Product::where('id', $id)->first();
+        $data = Pariwisata::where('id', $id)->first();
         if (empty($data)) {
             return response()->json([
                 'pesan' => 'Data Tidak Ditemukan',
@@ -116,19 +111,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $id->update($request->all());
-        // return response()->json([
-        //     'message' => 'Data berhasil diupdate',
-        //     'data' => $id
-        // ], 200);
-
-        $data = Product::where('id', $id)->first();
+        $data = Pariwisata::where('id', $id)->first();
         if (!empty($data)){
             $validate = Validator::make($request->all(), [
-                "name"          => "required",
-                "description"   => "required",
-                "price"         => "required|integer",
-                "category_id"   => "required|integer"
+            "name"          => "required",
+            "location"      => "required",
+            "price"         => "required|integer",
+            "description"   => "required",
+            "kategori_id"   => "required|integer"
             ]);
 
             if ($validate->passes()){
@@ -153,20 +143,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-     //cara hapus pertama
-    // public function destroy(Product $id)
-    // {
-    //     $id->delete();
-    //     return response()->json([
-    //         'pesan' => 'Data Berhasil dihapus'
-    //     ]);
-    // }
-
-    //cara hapus kedua
     public function destroy($id)
     {
-        $data = Product::where('id', $id)->first();
+        $data = Pariwisata::where('id', $id)->first();
         if (empty($data)) {
             return response()->json([
                 'pesan' => 'Data Tidak Ditemukan',

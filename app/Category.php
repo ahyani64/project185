@@ -11,8 +11,11 @@ class Category extends Model
 
     protected $fillable = ['name', 'description'];
 
-    public function kategori(){
-        return $this->belongsTo(Kategori::class);
-    }
+    // public function kategori(){
+    //     return $this->belongsTo(Category::class);
+    // }
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

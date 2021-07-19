@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMidsemestersTable extends Migration
+class CreateKategorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateMidsemestersTable extends Migration
      */
     public function up()
     {
-        Schema::create('midsemesters', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('kategoris', function (Blueprint $table) {
+            $table->bigIncrements('id', 11);
+            $table->string('name', 50);
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateMidsemestersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('midsemesters');
+        Schema::dropIfExists('kategoris');
     }
 }

@@ -16,7 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $data = Category::all();
+        $data = Category::with('products')->get();
         return response()->json([
             'pesan' => 'Data Berhasil Ditemukan',
             'data' => $data
@@ -104,7 +104,35 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //cara 1
+        // $id->update($request->all());
+        // return response()->json([
+        //     'message' => 'Data berhasil diupdate',
+        //     'data' => $id
+        // ], 200);
+
+        //cara 2
+        $data = Category::where('id', $id)->first();
+        if (!empty($data)){
+            $validate = Validator::make($request->all(), [
+                'name' => 'required',
+                'description' => 'required'
+            ]);
+
+            if ($validate->passes()){
+                $data->update($request->all());
+                return response()->json([
+                    'message' => 'Data berhasil disimpan',
+                    'data' => $data
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Data gagal disimpan',
+                    'data' => $validate->errors()->all()
+                ]);
+            }
+        }
+        return response()->json(['message' => 'Data tidak ditemukan'], 404);
     }
 
     /**
